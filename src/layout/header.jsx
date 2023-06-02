@@ -52,21 +52,21 @@ const Header = ({ setMenuShow }) => {
             as="ul"
             className="name-option hidden md:flex md:flex-col bg-white w-fit shadow-lg rounded-md absolute border border-gray-100 top-12 right-9 z-20"
             enter="transition-opacity duration-150"
-            enterFrom="opacity-0 pointer-event-none"
-            enterTo="opacity-100 pointer-event-auto"
+            enterFrom="opacity-0 scale-95 pointer-event-none"
+            enterTo="opacity-100 scale-100 pointer-event-auto"
             leave="transition-opacity duration-150"
-            leaveFrom="opacity-100 pointer-event-auto"
-            leaveTo="opacity-0 pointer-event-none"
+            leaveFrom="opacity-100 scale-100 pointer-event-auto"
+            leaveTo="opacity-0 scale-95 pointer-event-none"
           >
             <a
               href="#"
-              className="px-5 my-1 py-2 text-black hover:bg-slate-100"
+              className=" px-5 my-1 py-2 text-black hover:bg-slate-100 hover:text-blue-500"
             >
               <li>Your profile</li>
             </a>
             <a
               href="#"
-              className="px-5 my-1 py-2 text-black hover:bg-slate-100"
+              className="px-5 my-1 py-2 text-black hover:bg-slate-100  hover:text-blue-500"
             >
               <li>Sign out</li>
             </a>
