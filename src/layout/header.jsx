@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { Transition, Menu } from "@headlessui/react";
+
 import profile from "../assets/profile.webp";
 import PropType from "prop-types";
 
@@ -32,7 +35,7 @@ const Header = ({ setMenuShow }) => {
             onClick={() => setInputValue("")}
           ></i>
         </form>
-        <div className="flex items-center gap-3 w-fit mr-3 md:mr-12">
+        <Menu as="div" className="flex items-center gap-3 w-fit mr-3 md:mr-12">
           <i className="fa-solid fa-bell text-xl mr-1 text-slate-400 justify-self-end"></i>
           <span className="bg-black w-px h-6 opacity-20 hidden md:block md:mx-3"></span>
           <img
@@ -41,24 +44,34 @@ const Header = ({ setMenuShow }) => {
             className="rounded-full h-[30px] w-[30px] md:h-[40px] md:w-[40px] place-self-center opacity-80 transition-opacity duration-100 hover:opacity-100 peer/options"
           />
           <h1 className="hidden md:block">John Doe</h1>
-          <button className="peer">
-            <i className="fa fa-angle-down hidden md:block relative top-0.5 cursor-pointer peer"></i>
-          </button>
-          <ul className="name-option hidden md:flex md:flex-col bg-white w-fit shadow-lg rounded-md absolute border border-gray-100 top-12 right-9 z-20 transition-all duration-150 opacity-0 peer-focus:scale-100 peer-focus:opacity-100 peer-focus:translate-y-2">
+          <Menu.Button>
+            <i className="fa fa-angle-down hidden md:block relative top-0.5 cursor-pointer"></i>
+          </Menu.Button>
+
+          <Transition
+            as="ul"
+            className="name-option hidden md:flex md:flex-col bg-white w-fit shadow-lg rounded-md absolute border border-gray-100 top-12 right-9 z-20"
+            enter="transition-opacity duration-150"
+            enterFrom="opacity-0 pointer-event-none"
+            enterTo="opacity-100 pointer-event-auto"
+            leave="transition-opacity duration-150"
+            leaveFrom="opacity-100 pointer-event-auto"
+            leaveTo="opacity-0 pointer-event-none"
+          >
             <a
               href="#"
-              className="px-3 my-1 py-1 text-black hover:bg-slate-100"
+              className="px-5 my-1 py-2 text-black hover:bg-slate-100"
             >
               <li>Your profile</li>
             </a>
             <a
               href="#"
-              className="px-3 my-1 py-1 text-black hover:bg-slate-100"
+              className="px-5 my-1 py-2 text-black hover:bg-slate-100"
             >
               <li>Sign out</li>
             </a>
-          </ul>
-        </div>
+          </Transition>
+        </Menu>
       </nav>
     </>
   );
