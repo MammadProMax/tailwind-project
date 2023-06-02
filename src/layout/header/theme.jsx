@@ -2,30 +2,33 @@ import { useEffect, useState } from "react";
 
 const Theme = () => {
   const [isDark, setIsDark] = useState(false);
-  const saveTheme = (data) => {
-    localStorage.setItem("theme", data);
-  };
 
   useEffect(() => {
-    console.log(localStorage.getItem("theme"));
-    localStorage.getItem("theme") === "light"
-      ? setIsDark(false)
-      : setIsDark(true);
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    }
   }, []);
 
   isDark
     ? document.documentElement.classList.add("dark")
     : document.documentElement.removeAttribute("class");
 
+  const themeHandler = () => {
+    setIsDark(!isDark);
+    isDark ? (localStorage.theme = "light") : (localStorage.theme = "dark");
+  };
+
   return (
     <>
-      <button
-        className="relative"
-        onClick={() => {
-          setIsDark(!isDark);
-          !isDark ? saveTheme("dark") : saveTheme("light");
-        }}
-      >
+      <button className="relative" onClick={themeHandler}>
         {!isDark ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
